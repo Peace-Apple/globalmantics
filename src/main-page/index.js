@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './main-page.css';
 import Header from './header';
 
 function App() {
+  const [allHouses, setAllHouses] = useState([]);
   useEffect(()=>{
     const fetchHouses = async () => {
       const rsp = await fetch('/houses.json');
       const houses = await rsp.json();
+      setAllHouses(houses);
     }
     fetchHouses();
   }, [])
