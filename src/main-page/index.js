@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+// import { useEffect, useState, useMemo } from 'react';s
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom/cjs/react-router-dom.min';
 import './main-page.css';
 import Header from './header';
@@ -7,6 +7,7 @@ import SearchResults from '../search-results';
 import HouseFilter from './house-filter';
 import HouseFromQuery from '../house/house-from-query';
 import useHouses from '../hooks/useHouses';
+import useFeaturedHouse from '../hooks/useFeaturedHouse';
 
 function App() {
   // using hook within file
@@ -23,12 +24,16 @@ function App() {
   // using custom hook created for all houses
   const allHouses = useHouses();
 
-  const featuredHouse = useMemo(()=> {
-    if (allHouses.length) {
-      const randomIndex = Math.floor(Math.random() * allHouses.length);
-      return allHouses[randomIndex];
-    }
-  }, [allHouses]);
+  // another hook within file
+  // const featuredHouse = useMemo(()=> {
+  //   if (allHouses.length) {
+  //     const randomIndex = Math.floor(Math.random() * allHouses.length);
+  //     return allHouses[randomIndex];
+  //   }
+  // }, [allHouses]);
+
+  //use custom hook for featured house
+  const featuredHouse = useFeaturedHouse(allHouses);
 
   return (
     <Router>
