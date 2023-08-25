@@ -6,17 +6,22 @@ import FeaturedHouse from './featured-house';
 import SearchResults from '../search-results';
 import HouseFilter from './house-filter';
 import HouseFromQuery from '../house/house-from-query';
+import useHouses from '../hooks/useHouses';
 
 function App() {
-  const [allHouses, setAllHouses] = useState([]);
-  useEffect(()=>{
-    const fetchHouses = async () => {
-      const rsp = await fetch('/houses.json');
-      const houses = await rsp.json();
-      setAllHouses(houses);
-    }
-    fetchHouses();
-  }, [])
+  // using hook within file
+  // const [allHouses, setAllHouses] = useState([]);
+  // useEffect(()=>{
+  //   const fetchHouses = async () => {
+  //     const rsp = await fetch('/houses.json');
+  //     const houses = await rsp.json();
+  //     setAllHouses(houses);
+  //   }
+  //   fetchHouses();
+  // }, []);
+
+  // using custom hook created for all houses
+  const allHouses = useHouses();
 
   const featuredHouse = useMemo(()=> {
     if (allHouses.length) {
